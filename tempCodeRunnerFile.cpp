@@ -1,0 +1,2 @@
+
+    list.Remove(3);
