@@ -16,10 +16,10 @@ class Grath
 public:
     Grath(int n, int m);
     ~Grath();
-        vector<int> were;
+    vector<int> were;
     void Input();
     void Print();
-
+    int source();
     bool Connect();
     void DFS(int v);
     void change();
@@ -139,6 +139,22 @@ bool Grath::Connect()
 }
 
 
+int Grath::source()
+{
+    int res = 0;
+    were.clear();
+    for (size_t i = 1; i <= n; i++)
+    {
+        were.clear();
+        DFS(i);
+        if (were.size() == n)
+        {
+            res++;
+        }
+    }
+    
+}
+
 int main(int argc, char const* argv[])
 {
     Grath g(4, 4);
@@ -158,7 +174,8 @@ int main(int argc, char const* argv[])
     {
         cout << 2;
     }
-    
+
+    cout << "\n" << g.source();
     return 0;
 }
 
