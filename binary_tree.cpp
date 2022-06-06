@@ -114,7 +114,6 @@ bool Tree::Repetition()
 
 }
 
-
 int Tree::Min_Right_root(Node* root)
 {
     root = root ->Right;
@@ -125,7 +124,6 @@ int Tree::Min_Right_root(Node* root)
     return root->info;
     
 }
-
 void Tree::Repetition(Node* root, int &min, bool &b)
 {
     if(!b) return;
@@ -143,8 +141,6 @@ void Tree::Repetition(Node* root, int &min, bool &b)
         }
         Repetition(root ->Right, min, b);
     }
-    
-
 }
 
 void Tree::Print()
