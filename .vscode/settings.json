@@ -2,6 +2,8 @@
     "files.associations": {
         "iosfwd": "cpp",
         "iostream": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "climits": "cpp",
+        "*.tcc": "cpp"
     }
 }
