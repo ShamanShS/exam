@@ -1,4 +1,5 @@
 #include<iostream>
+#include <climits>
 
 using namespace std;
 
@@ -27,13 +28,15 @@ class Tree
         void Add(int info);
         void Print();
         int Search(int t);
-
+        bool Repetition();
 
     private:    
+        int Min_Right_root(Node* root);
         void Add(int info, Node*& root, int lvl);
         void Destroy(Node* root);
         void Print(Node* root);
         void Search(int t, int &res, Node* root);
+        void Repetition(Node* root, int &min, bool &b);
 
 };
 
@@ -99,9 +102,49 @@ void Tree::Search(int t, int& res, Node* root)
     if (root->Right!=NULL)
     {
         Search(t, res, root->Right);
+    } 
+}
+
+bool Tree::Repetition()
+{
+    int min = INT_MAX;
+    bool b = true;
+    Repetition(main_root, min, b);
+    return b;
+
+}
+
+
+int Tree::Min_Right_root(Node* root)
+{
+    root = root ->Right;
+    while (root->Left!=NULL)
+    {
+        root = root ->Left;
+    }
+    return root->info;
+    
+}
+
+void Tree::Repetition(Node* root, int &min, bool &b)
+{
+    if(!b) return;
+    if (root -> Left != NULL)
+    {
+         Repetition(root ->Left, min, b);
     }
     
+    if(root ->Right != NULL)
+    {
+        if (root->info == Min_Right_root(root))
+        {
+            b = false;
+            return;
+        }
+        Repetition(root ->Right, min, b);
+    }
     
+
 }
 
 void Tree::Print()
@@ -128,11 +171,19 @@ void Tree::Print(Node* root)
 int main(int argc, char const *argv[])
 {
     Tree tree;
-    int a[]={7,3,6,8,1,2,4,5,10, 1002, -3};
+    int a[]={7,3,6,1,13,2,11,0,10, 111, 3};
     for(int i=0;i<11; i++)
         tree.Add(a[i]);
     tree.Print();
     cout<<endl;
     cout << tree.Search(4);
+    cout<<endl;
+    if(tree.Repetition())
+    {
+        cout<< "N" <<endl;
+    }
+    else{
+        cout<< "Y" <<endl;
+    }
     return 0;
 }
