@@ -64,7 +64,14 @@ Vector::Vector()
 Vector::Vector(vector<pair <int, int>> v, int n)
 {
     this ->n = n;
-    this ->v = v;
+    for (size_t i = 0; i < n; i++)
+    {
+        if (v[i].first !=0)
+        {
+            this->v.push_back(v[i]);
+        }
+    }
+    
 }
 
 Vector operator+(Vector v1, Vector v2)
@@ -102,6 +109,6 @@ int main(int argc, char const *argv[])
     
     cin >> a >> b;
     Vector c = a+b;
-    cout << c <<  " = " << a << " + " << b;
+    cout << a << " +\n" << b << " =\n" << c;
     return 0;
 }
