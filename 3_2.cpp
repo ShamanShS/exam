@@ -22,7 +22,7 @@ istream& operator >> (istream& in, Vector& vec)
     cout << "size vector\n";
     int n;
     in >> vec.n;
-     cout << "vector\n";
+    cout << "vector\n";
     for (size_t i = 0; i < vec.n; i++)
     {
         int a;

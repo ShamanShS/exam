@@ -29,7 +29,7 @@ class Tree
         void Print();
         int Search(int t);
         bool Repetition();
-
+        void Add_Depth();
     private:    
         int Min_Right_root(Node* root);
         void Add(int info, Node*& root, int lvl);
@@ -37,7 +37,7 @@ class Tree
         void Print(Node* root);
         void Search(int t, int &res, Node* root);
         void Repetition(Node* root, int &min, bool &b);
-
+        int Depth(Node* root);
 };
 
 Tree::Tree()
@@ -163,12 +163,23 @@ void Tree::Print(Node* root)
     Print(root->Right);
 }
 
+void Tree::Add_Depth()
+{
+    Add(Depth(main_root));
+}
+
+int Tree::Depth(Node* root)
+{
+    if(root == NULL) return 0;
+
+    return 1+max(Depth(root->Left), Depth(root->Right));
+}
 
 int main(int argc, char const *argv[])
 {
     Tree tree;
-    int a[]={7,3,6,1,13,2,11,0,10, 111, 3};
-    for(int i=0;i<11; i++)
+    int a[]={8, 7, 5, 6};
+    for(int i=0;i<4; i++)
         tree.Add(a[i]);
     tree.Print();
     cout<<endl;
@@ -181,5 +192,7 @@ int main(int argc, char const *argv[])
     else{
         cout<< "Y" <<endl;
     }
+    tree.Add_Depth();
+    tree.Print();
     return 0;
 }
