@@ -9,28 +9,37 @@ class Polinom
 public:
     Polinom(int n);
     Polinom(int n, int* a);
+    Polinom(const Polinom& ob);
     ~Polinom();
     friend istream& operator >> (istream& in, Polinom& p);
     friend ostream& operator << (ostream& out, Polinom& p);
-    Polinom operator * (Polinom p1)
-    {
+    friend Polinom operator * (Polinom p1, Polinom p2);
+    // {
 
-    int n = (p1.n - 1) + (this->n - 1) + 1;
-    int* a = new int[n];
-    for (int i = 0; i < n; i++)
-    {
-        a[i] = 0;
-    }
-    for (int i = 0; i < p1.n; i++)
-    {
-        for (int i1 = 0; i1 < this->n; i1++)
-        {
-            a[i1 + i] += p1.a[i] * this->a[i1];
-        }
-    }
-    return Polinom(n, a);
-    }
+    // int n = (p1.n - 1) + (this->n - 1) + 1;
+    // int* a = new int[n];
+    // for (int i = 0; i < n; i++)
+    // {
+    //     a[i] = 0;
+    // }
+    // for (int i = 0; i < p1.n; i++)
+    // {
+    //     for (int i1 = 0; i1 < this->n; i1++)
+    //     {
+    //         a[i1 + i] += p1.a[i] * this->a[i1];
+    //     }
+    // }
+    // return Polinom(n, a);
+    // }
 };
+
+Polinom::Polinom(const Polinom& ob)
+{
+    n=ob.n;
+    a=new int[n];
+    for(int i=0;i<n;i++)
+        a[i]=ob.a[i];
+}
 
 Polinom::~Polinom()
 {
@@ -71,23 +80,23 @@ ostream& operator << (ostream& out, Polinom& p)
     return out;
 }
 
-// Polinom operator * (Polinom p1, Polinom p2)
-// {
-//     int n = (p1.n - 1) + (p2.n - 1) + 1;
-//     int* a = new int[n];
-//     for (int i = 0; i < n; i++)
-//     {
-//         a[i] = 0;
-//     }
-//     for (int i = 0; i < p1.n; i++)
-//     {
-//         for (int i1 = 0; i1 < p2.n; i1++)
-//         {
-//             a[i1 + i] += p1.a[i] * p2.a[i1];
-//         }
-//     }
-//     return Polinom(n, a);
-// }
+Polinom operator * (Polinom p1, Polinom p2)
+{
+    int n = (p1.n - 1) + (p2.n - 1) + 1;
+    int* a = new int[n];
+    for (int i = 0; i < n; i++)
+    {
+        a[i] = 0;
+    }
+    for (int i = 0; i < p1.n; i++)
+    {
+        for (int i1 = 0; i1 < p2.n; i1++)
+        {
+            a[i1 + i] += p1.a[i] * p2.a[i1];
+        }
+    }
+    return Polinom(n, a);
+}
 
 
 int main(int argc, char const* argv[])
