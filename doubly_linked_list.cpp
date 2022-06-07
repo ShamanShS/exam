@@ -1,5 +1,5 @@
 #include<iostream>
-
+#include<climits>
 using namespace std;
 
 class List
@@ -27,6 +27,7 @@ class List
         void Remove(int pos);
         void Print();
         bool Sim();
+        void Duplicate();
     private:
         void Remove_Node(Node*& node);
         void Remove_Node_Head(Node*& node);
@@ -197,7 +198,44 @@ void List::Print()
     cout<<")"<<endl;
 }
 
-
+void List::Duplicate()
+{
+    int minn = INT_MAX;
+    int maxx = -INT_MAX;
+    if(size%2 ==0)
+    {
+        Node* curH = Head;
+        Node* curT = Tail;
+        for (int i = 0; i < size/2; i++)
+        {
+            minn = min(minn, curH->info);
+            minn = min(minn, curT->info);
+            maxx = max(maxx, curH->info);
+            maxx = max(maxx, curT->info);
+            curH = curH->next;
+            curT = curT->prev;
+        }
+    }
+    else
+    {
+        Node* curH = Head;
+        Node* curT = Tail;
+        maxx = max(maxx, curH->info);
+        minn = min(minn, curH->info);
+        curH = curH->next;
+        for (int i = 0; i < (size-1)/2; i++)
+        {
+            minn = min(minn, curH->info);
+            minn = min(minn, curT->info);
+            maxx = max(maxx, curH->info);
+            maxx = max(maxx, curT->info);
+            curH = curH->next;
+            curT = curT->prev;
+        }
+    }
+    Add(minn, 0);
+    Add(maxx, size);
+}
 
 int main(int argc, char const *argv[])
 {
@@ -221,5 +259,7 @@ int main(int argc, char const *argv[])
     {
        cout << 2 << endl; 
     }
+    list.Duplicate();
+    list.Print();
     return 0;
 }
